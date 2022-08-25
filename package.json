@@ -1,0 +1,23 @@
+{
+  "name": "saxon-js-worker",
+  "version": "1.0.0",
+  "description": "Using SaxonJS in a web-worker",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run copy-dist && npm run compile-sef && npm run compile-worker",
+    "copy-dist": "copyfiles -u 1 src/index.html src/css/style.css src/js/main.js dist",
+    "compile-sef": "xslt3 -xsl:src/xsl/uppercase.xsl -export:dist/sef/uppercase.sef.json -nogo",
+    "compile-worker": "browserify src/js/saxon-worker.js > dist/js/worker.js",
+    "start": "npm run build && http-server -c-1 ./dist"
+  },
+  "author": "Jim Etevenard",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "copyfiles": "^2.4.1",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "xslt3": "^2.4.0"
+  }
+}

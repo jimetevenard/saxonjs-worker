@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saxon JS in a Worker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Saxon JS in a Worker</h1>
+
+    <section class="documentation">
+        <p>
+            <a href="https://www.saxonica.com/saxon-js/index.xml">SaxonJS</a>
+            at work in the context of a
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">Web Worker</a>.<br />
+        </p>
+        
+        <p>
+            Web Workers operate in a separated thread from the main web page, allowing you to run transformations
+            on documents of consequent size without freezing the UI.
+        </p>
+        
+        <p>
+            The main point of this demo is that the Web Worker context
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers">has
+                no access to the DOM API</a>, needed by SaxonJS.
+        </p>
+        <p>
+            As a workaround,
+            <strong>
+                I do use the <a href="https://www.npmjs.com/package/saxon-js">NodeJS version of SaxonJS</a>,
+                embedded with the help of <em>npm</em> and <a href="https://www.npmjs.com/package/browserify">Browserify</a>.
+            </strong>
+        </p>
+        
+        <blockquote>
+            For Node.js (...) The Saxon product includes its own XML parser and DOM implementation, rather than relying on the
+            parser and DOM library supplied by the browser vendor.
+            <br /><span class="quote-source">See <a
+                    href="https://www.saxonica.com/saxon-js/documentation2/index.html#!about/components">SaxonJS
+                    documentation</a></span>
+        </blockquote>
+    </section>
+
+    <h2>Testing zone</h2>
+
+    <p>Have a look at the sources, the XSLT Transforms text-nodes to uppercase.</p>
+
+
+    <main>
+        <div class="zone">
+            <h3>Source document</h3>
+            <textarea id="source-xml" rows="15">
+<books>
+    <book>
+        <title>In Search of Lost Tim</title>
+        <author>Marcel Proust</author>
+    </book>
+    <book>
+        <title>Ulysses</title>
+        <author>James Joyce</author>
+    </book>
+    <book>
+        <title>Don Quixote</title>
+        <author>Miguel de Cervantes</author>
+    </book>
+</books>
+            </textarea>
+            <button class="large" id="btn-transform">Transform</button>
+        </div>
+        <div class="zone">
+            <h3>Transformation result</h3>
+            <pre><code id="result"></code></pre>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
