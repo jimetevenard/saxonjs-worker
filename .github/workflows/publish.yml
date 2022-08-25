@@ -1,0 +1,26 @@
+# Builds the demo and push contents of /dist/ to the gh-pages branch.
+# That branch will then be served by Github Pages
+
+name: Build and puslish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and publish demo
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build
+    - run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d dist -u "github-actions-bot <noreply@jimetevenard.com>"
