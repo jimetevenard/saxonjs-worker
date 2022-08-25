@@ -1,5 +1,7 @@
 # Saxon JS in a Worker
 
+**Live demo at <https://jimetevenard.github.io/saxonjs-worker/>**
+
 [SaxonJS](https://www.saxonica.com/saxon-js/index.xml)  at work in the context of a  [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).  
 
 Web Workers operate in a separated thread from the main web page, allowing you to run transformations on documents of consequent size without freezing the UI.

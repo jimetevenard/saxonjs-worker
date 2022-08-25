@@ -26,6 +26,12 @@ blockquote {
     border-left: 10px solid #b8d6d6;
 }
 
+.source {
+    color: #676767;
+    font-size: 0.9em;
+    line-height: initial;
+}
+
 .quote-source {
     font-style: normal;
 }
@@ -61,6 +67,10 @@ button.large {
     }
     textarea, pre {
         min-height: 16rem;
+    }
+    .source {
+        position: relative;
+        top: -1em;
     }
 }
 
