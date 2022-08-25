@@ -12,3 +12,30 @@ As a workaround,  **I do use the  [NodeJS version of SaxonJS](https://www.npmjs.
 
 > For Node.js (...) The Saxon product includes its own XML parser and DOM implementation, rather than relying on the parser and DOM library supplied by the browser vendor.  
 > See  [SaxonJS documentation](https://www.saxonica.com/saxon-js/documentation2/index.html#!about/components)
+
+## Running locally
+
+With nodeJS installed, just run the following :
+
+````sh
+npm install
+npm start
+````
+
+And go to `http://localhost:8080/`
+
+## Details
+
+The [`package.json` build script](https://github.com/jimetevenard/saxonjs-worker/blob/main/package.json) :
+
+* Compiles the [XSLT](https://github.com/jimetevenard/saxonjs-worker/blob/main/src/xsl/uppercase.xsl) into a SEF file
+* *Browserifies* the [saxon-worker.js](https://github.com/jimetevenard/saxonjs-worker/blob/main/src/js/saxon-worker.js) script (resolving the `require('saxon-js')` and the local code into a single file)
+* We can then, in our [`main.js` script](https://github.com/jimetevenard/saxonjs-worker/blob/main/src/js/main.js)
+  * Get the SEF via http
+  * Instantiate a worker running the compiled `worker.js` file
+
+When the *transform* button is clicked, the SEF, XML source and a few params are sent to the worker.
+
+The main script can [subscribe](https://github.com/jimetevenard/saxonjs-worker/blob/main/src/js/main.js#L26) to the messages sent by the worker to display the result.
+
+Voilà !
